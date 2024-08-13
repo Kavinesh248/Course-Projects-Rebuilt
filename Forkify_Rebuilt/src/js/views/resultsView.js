@@ -1,5 +1,4 @@
 import icons from "url:../../img/icons.svg";
-import { fractional } from "fractional";
 import View from "./View.js";
 
 class ResultsView extends View {
@@ -7,11 +6,14 @@ class ResultsView extends View {
   _errorMessage = "We can't find recipe! Try again with another recipe :D";
 
   _generateMarkup() {
+    const id = window.location.hash.slice(1);
     return this._data
       .map((res) => {
         return `
      <li class="preview">
-        <a class="preview__link preview__link" href="#${res.id}">
+        <a class="preview__link ${
+          id === res.id ? "preview__link--active" : ""
+        }" href="#${res.id}">
           <figure class="preview__fig">
             <img src="${res.image}" alt="${res.title}" />
           </figure>
